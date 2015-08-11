@@ -15,12 +15,22 @@ module FFaker
       COUNTRY.sample
     end
 
-    def city
-      CITY.sample
+    def city(with_identifier = false)
+      identifier = if with_identifier then "м." else "" end
+      "#{identifier} #{CITY.sample}"
     end
 
-    def province
-      PROVINCE.sample
+    def village(with_identifier = false)
+      identifier = if with_identifier then "с." else "" end
+      "#{identifier} #{VILLAGE.sample}"
+    end
+
+    def province(with_special_regions = true)
+      if with_special_regions
+        (PROVINCE + SPECIAL_REGION).sample
+      else
+        PROVINCE.sample
+      end
     end
 
     def zip_code
@@ -47,6 +57,23 @@ module FFaker
 
     def appartment_number
       numerify_mask(APPARTMENT_NUMBER_FORMATS)
+    end
+
+    def full_address(settlement_type = :city)
+      case settlement_type
+      when :city
+        "Україна, #{zip_code}, #{city(true)}, #{street_address(true)}"
+      when :village
+        "Україна, #{zip_code}, #{province(false)}, #{village(true)}, #{street_address}"
+      end
+    end
+
+    def envelope_address(entries_devider = "\n")
+      "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}" + entries_devider +
+      "#{street_address(true)}" + entries_devider +
+      "м. #{city}" + entries_devider +
+      "#{province}" + entries_devider +
+      "#{zip_code}"
     end
 
     private

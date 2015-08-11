@@ -13,12 +13,24 @@ class TestAddressUA < Test::Unit::TestCase
     assert_match @multiple_words_name_regexp, @tester.city
   end
 
+  def test_city_with_identifier
+    assert_match /\Aм\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/, @tester.city(true)
+  end
+
+  def test_village
+    assert_match @multiple_words_name_regexp, @tester.village
+  end
+
+  def test_village_with_identifier
+    assert_match /\Aс\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/, @tester.village(true)
+  end
+
   def test_country
     assert_match @multiple_words_name_regexp, @tester.country
   end
 
   def test_province
-    assert_match @multiple_words_name_regexp, @tester.province
+    assert_match /\A[а-яА-ЯіїєґІЇЄҐ’\-\s\.]+\z/, @tester.province
   end
 
   def test_zip_code
@@ -49,5 +61,21 @@ class TestAddressUA < Test::Unit::TestCase
 
   def test_appartment_number
     assert_match /\A\d{1,3}\z/, @tester.appartment_number
+  end
+
+  def test_envelope_address
+
+  end
+
+  def test_envelope_address_with_deviders
+
+  end
+
+  def test_full_address_city_type
+
+  end
+
+  def test_full_address_village_type
+
   end
 end
