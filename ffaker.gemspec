@@ -93,9 +93,11 @@ Gem::Specification.new do |s|
     lib/ffaker/data/address_sn/arrondissements
     lib/ffaker/data/address_sn/departements
     lib/ffaker/data/address_sn/regions
+    lib/ffaker/data/address_ua/avenue
     lib/ffaker/data/address_ua/country
     lib/ffaker/data/address_ua/city
     lib/ffaker/data/address_ua/province
+    lib/ffaker/data/address_ua/square
     lib/ffaker/data/address_ua/street
     lib/ffaker/data/address_uk/county
     lib/ffaker/data/address_us/state
