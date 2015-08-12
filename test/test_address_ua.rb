@@ -45,6 +45,10 @@ class TestAddressUA < Test::Unit::TestCase
     assert_match /\Aпл\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/, @tester.square_name
   end
 
+  def test_avenue_name
+    assert_match /\Aпр\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/, @tester.avenue_name
+  end
+
   def test_street_address
     assert_match /\Aвул\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\s\d{1,3}\z/, @tester.street_address
   end
