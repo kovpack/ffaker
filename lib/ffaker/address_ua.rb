@@ -27,7 +27,7 @@ module FFaker
 
     def province(with_special_regions = true)
       if with_special_regions
-        (PROVINCE + SPECIAL_REGION).sample
+        (PROVINCE + SPECIAL_REGION + AUTONOMOUS_REPUBLIC).sample
       else
         PROVINCE.sample
       end
@@ -68,7 +68,7 @@ module FFaker
       end
     end
 
-    def envelope_address(entries_devider = "\n")
+    def envelope_address(entries_devider = "</br>")
       "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}" + entries_devider +
       "#{street_address(true)}" + entries_devider +
       "м. #{city}" + entries_devider +

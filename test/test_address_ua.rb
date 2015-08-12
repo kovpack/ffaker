@@ -9,6 +9,10 @@ class TestAddressUA < Test::Unit::TestCase
     @multiple_words_name_regexp = /\A[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/
   end
 
+  def test_country
+    assert_match @multiple_words_name_regexp, @tester.country
+  end
+
   def test_city
     assert_match @multiple_words_name_regexp, @tester.city
   end
@@ -23,10 +27,6 @@ class TestAddressUA < Test::Unit::TestCase
 
   def test_village_with_identifier
     assert_match /\Aс\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\z/, @tester.village(true)
-  end
-
-  def test_country
-    assert_match @multiple_words_name_regexp, @tester.country
   end
 
   def test_province
@@ -63,19 +63,23 @@ class TestAddressUA < Test::Unit::TestCase
     assert_match /\A\d{1,3}\z/, @tester.appartment_number
   end
 
-  def test_envelope_address
-
-  end
-
-  def test_envelope_address_with_deviders
-
-  end
-
   def test_full_address_city_type
-
+    assert_match /\AУкраїна,\s\d{5},\sм\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\s
+      вул\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\s\d{1,3},\sкв\.\s\d{1,3}
+      \z/x, @tester.full_address(:city)
   end
 
   def test_full_address_village_type
+    assert_match /\AУкраїна,\s\d{5},\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\sобл\.,\s
+      с\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\sвул\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\s\d{1,3}
+      \z/x, @tester.full_address(:village)
+  end
 
+  def test_envelope_address
+    assert_match /\A[а-яА-ЯіїєґІЇЄҐ’\-\s]+\<\/br\>
+      вул\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+,\s\d{1,3},\sкв\.\s\d{1,3}\<\/br\>
+      м\.\s[а-яА-ЯіїєґІЇЄҐ’\-\s]+\<\/br\>
+      [а-яА-ЯіїєґІЇЄҐ’\-\s]+обл\.\<\/br\>
+      \d{5}\z/x, @tester.envelope_address
   end
 end
