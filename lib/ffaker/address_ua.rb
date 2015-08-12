@@ -72,11 +72,11 @@ module FFaker
       end
     end
 
-    def envelope_address(entries_devider = "</br>")
-      "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}" + entries_devider +
-      "#{street_address(true)}" + entries_devider +
-      "м. #{city}" + entries_devider +
-      "#{province}" + entries_devider +
+    def envelope_address(devider = "</br>")
+      "#{FFaker::NameUA.last_name_male} #{FFaker::NameUA.first_name_male} #{FFaker::NameUA.middle_name_male}" + devider +
+      "#{street_address(true)}" + devider +
+      "#{city(true)}" + devider +
+      "#{province}" + devider +
       "#{zip_code}"
     end
 
